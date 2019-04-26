@@ -2,64 +2,61 @@
 <html>
     <head>
         <title>Hello cruel world</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        </link>
-            
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous">
-        </script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- <script src="node_modules/socket.io/lib/socket.js"></script> -->
+        <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
     </head>
     <body>
         <div class="container-fluid">
-            <div class="card" align="center">
-                <h5 class="card-header">NoC Config Page</h5>
-                <div class="card-body">
-                    <div class="form">
-                        <div class="row">
-                            <label for="select_arch">Choose Noc Architecture</label>
-                            <select class="browser-default custom-select" id="select_arch">
-                                <option value="1">Noc Mesh</option>
-                                <option value="2">Noc Ring</option>
-                                <option value="3">Noc Mesh 2d</option>
-                            </select>
-                        </div>
-                        <div class="row mt-2">
-                            <label for="input_x">Nodes X</label>
-                            <input type="number" class="form-control" id="input_x" placeholder="Size of X">
-                        </div>
-                        <div class="row mt-2">
-                            <label for="input_y">Nodes Y</label>
-                            <input type="number" class="form-control" id="input_y" placeholder="Size of X">
-                        </div>
-                        <div class="row mt-3">
-                            <label for="filename">Filename</label>
-                            <input type="text" class="form-control" id="filename" placeholder="Filename">
-                        </div>
-                        <div class="row mt-3">
-                            <label for="select_out">Chose Output File Format</label>
-                            <select class="browser-default custom-select" id="select_out">
-                                <option value="1">Json</option>
-                                <option value="2">Xml</option>
-                            </select>
-                        </div>
-                        <div class="row mt-3">
-                            <button type="button" id="btgenerate" align="center" class="btn btn-primary">Generate</button>
-                        </div>
+            <div class="panel panel-default col-md-4">
+                <div class="panel-heading">NoC Config Page</div>
+                <div class="panel-body">
+                    <div class="row mt-2">
+                        <label for="select_arch">Choose Noc Architecture</label>
+                        <select class="browser-default custom-select" id="select_arch">
+                            <option value="1">Noc Mesh</option>
+                            <option value="2">Noc Ring</option>
+                            <option value="3">Noc Mesh 2d</option>
+                        </select>
+                    </div>  
+                    <div class="row mt-2">
+                        <label for="input_x">Nodes X</label>
+                        <input type="number" class="form-control" id="input_x" placeholder="Size of X">
+                    </div>
+                    <div class="row mt-2">
+                        <label for="input_y">Nodes Y</label>
+                        <input type="number" class="form-control" id="input_y" placeholder="Size of X">
+                    </div>
+
+                    <div class="row mt-3">
+                        <label for="filename">Filename</label>
+                        <input type="text" class="form-control" id="filename" placeholder="Filename">
+                    </div>
+                    <div class="row mt-3">
+                        <label for="select_out">Chose Output File Format</label>
+                        <select class="browser-default custom-select" id="select_out">
+                            <option value="1">Json</option>
+                            <option value="2">Xml</option>
+                        </select>
+                    </div>
+                    <div class="row mt-3">
+                        <button type="button" id="btgenerate" align="center" class="btn btn-primary">Generate</button>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>            
+        </div>            
     </body>
 </html>
-<script src='/home/ragnar/Documentos/TrabalhoMadalozzo/ClientServer/node_modules/socket.io-client/dist/socket.io.js'></script>
+
 <script>
+
     var socket = io();
     $("#btgenerate").click(function () {
         var data = {
@@ -68,12 +65,12 @@
             'noc_y': $("#input_y").val(),
             'filename': $("#filename").val()
         }
-        // sendToServer("arch", data);
-        console.log(data);
+        
+        socket.emit("podaskopdka", function (data) {
+			console.log(dada);
+        });
+        
+        // console.log(data);
     });
 
-
-    function sendToServer(id_msg, data) {
-        socket.emit(id_msg, data);
-    }
 </script>
