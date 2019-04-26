@@ -1,6 +1,6 @@
 from aiohttp import web
 import socketio
-
+import json
 # creates a new Async Socket IO Server
 sio = socketio.AsyncServer()
 # Creates a new Aiohttp Web Application
@@ -20,14 +20,15 @@ async def index(request):
 # event we wish to listen out for
 @sio.on('message')
 async def print_message(sid, message):
-    print("Socket ID: " , sid)
-    print(message)
+    # print("Socket ID: " , sid)
+    message = json.dumps(message)
+    print("Ta vindo: " , message)
+    
+    obj = json.loads((message))
+    print((obj.noc_arch))
     # await a successful emit of our reversed message
     # back to the client
-    await sio.emit('message', message[::-1])
-
-
-    
+    # await sio.emit('message', message[::-1])
 
 # We bind our aiohttp endpoint to our app
 # router

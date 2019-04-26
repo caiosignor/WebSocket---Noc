@@ -3,15 +3,13 @@
     <head>
         <title>Hello cruel world</title>
         <!-- Latest compiled and minified CSS -->
+        <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <!-- <script src="node_modules/socket.io/lib/socket.js"></script> -->
-        <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+        
     </head>
     <body>
         <div class="container-fluid">
@@ -54,21 +52,24 @@
         </div>            
     </body>
 </html>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
 
-    var socket = io();
+    // var socket = io();
+    const socket = io("http://localhost:8080");
+
     $("#btgenerate").click(function () {
         var data = {
-            'noc_arch': $("#select_arch").val(),
-            'noc_x': $("#input_x").val(),
-            'noc_y': $("#input_y").val(),
-            'filename': $("#filename").val()
+            "noc_arch": $("#select_arch").val(),
+            "noc_x": $("#input_x").val(),
+            "noc_y": $("#input_y").val(),
+            "filename": $("#filename").val()
         }
-        
-        socket.emit("podaskopdka", function (data) {
-			console.log(dada);
-        });
+        console.log(data.toString());
+        socket.emit("message", data);
+        // socket.emit("podaskopdka", function (data) {
+		// 	console.log(dada);
+        // });
         
         // console.log(data);
     });
