@@ -37,3 +37,14 @@ app.router.add_get('/', index)
 # We kick off our server
 if __name__ == '__main__':
     web.run_app(app)
+
+
+
+
+# var dataXML = `<noc>
+#                         <noc_arch>${noc_x}</noc_arch>
+#                         <noc_x>${noc_x}</noc_x>
+#                         <noc_y>${noc_y}</noc_y>
+#                         <filename>${filename}</filename>
+#                        </noc> 
+#         `;

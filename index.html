@@ -59,13 +59,26 @@
     const socket = io("http://localhost:8080");
 
     $("#btgenerate").click(function () {
+
+        var select_arch = $("#select_arch").val();
+        var noc_x = $("#input_x").val();
+        var noc_y = $("#input_y").val();
+        var filename = $("#filename").val();
+        var output = $("#select_out").val();
+
+
+        
         var data = {
-            "noc_arch": $("#select_arch").val(),
-            "noc_x": $("#input_x").val(),
-            "noc_y": $("#input_y").val(),
-            "filename": $("#filename").val()
+            "noc_arch": select_arch,
+            "noc_x": noc_x,
+            "noc_y": noc_y,
+            "filename": filename,
+            "output": output
         }
-        console.log(data.toString());
+
+        
+
+        console.log(dataXML);
         socket.emit("message", data);
         // socket.emit("podaskopdka", function (data) {
 		// 	console.log(dada);
