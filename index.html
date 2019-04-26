@@ -26,11 +26,11 @@
                     </div>  
                     <div class="row mt-2">
                         <label for="input_x">Nodes X</label>
-                        <input type="number" class="form-control" id="input_x" placeholder="Size of X">
+                        <input type="number" min="2" class="form-control" id="input_x" placeholder="Size of X">
                     </div>
                     <div class="row mt-2">
                         <label for="input_y">Nodes Y</label>
-                        <input type="number" class="form-control" id="input_y" placeholder="Size of X">
+                        <input type="number" min="2" class="form-control" id="input_y" placeholder="Size of Y">
                     </div>
 
                     <div class="row mt-3">
@@ -40,8 +40,8 @@
                     <div class="row mt-3">
                         <label for="select_out">Chose Output File Format</label>
                         <select class="browser-default custom-select" id="select_out">
-                            <option value="1">Json</option>
-                            <option value="2">Xml</option>
+                            <option value="1">JSON</option>
+                            <option value="2">XML</option>
                         </select>
                     </div>
                     <div class="row mt-3">
@@ -54,37 +54,22 @@
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
-
     // var socket = io();
     const socket = io("http://localhost:8080");
 
     $("#btgenerate").click(function () {
-
-        var select_arch = $("#select_arch").val();
-        var noc_x = $("#input_x").val();
-        var noc_y = $("#input_y").val();
-        var filename = $("#filename").val();
-        var output = $("#select_out").val();
-
-
-        
         var data = {
-            "noc_arch": select_arch,
-            "noc_x": noc_x,
-            "noc_y": noc_y,
-            "filename": filename,
-            "output": output
+            "noc":{
+                "noc_arch": $("#select_arch").val(),
+                "noc_x": $("#input_x").val(),
+                "noc_y": $("#input_y").val(),
+                "filename": $("#filename").val()
+            },
+            "type": $("#select_out").val()
         }
 
-        
-
-        console.log(dataXML);
+        console.log(data);
         socket.emit("message", data);
-        // socket.emit("podaskopdka", function (data) {
-		// 	console.log(dada);
-        // });
-        
-        // console.log(data);
     });
 
 </script>
